@@ -1,1 +1,2 @@
-Getting git is legit 
+Getting git is legit
+This is a scond line of text 
