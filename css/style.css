@@ -6,3 +6,46 @@ this file is named "site.css" and is in a directory named "css"
     color: purple;
     text-decoration: underline;
 }
+
+h1.veridian {
+    text-align: center;
+}
+
+body {
+    background-image: url("../img/gnome-computer.png");
+    background-color: coral;
+    background-size: 300px 100px;
+    font-family: 'Sen', sans-serif;
+
+}
+
+h2 {
+    color: blue;
+    text-decoration: underline;
+}
+
+ul {
+    list-style-type: square;
+}
+
+tr, td {
+    padding: 15px;
+    text-align: left;
+    font-size: 15px;
+}
+
+a:link {
+    color: pink;
+}
+
+a:visited {
+    color: green;
+}
+
+a:hover {
+    font-size: large;
+}
+
+a:active {
+    font-size: small;
+}
