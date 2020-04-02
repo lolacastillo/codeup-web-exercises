@@ -18,6 +18,23 @@
             return false
         }
     }
+    function twoMoreAwayFromZero(i){
+        if(i >= 0) {
+            i += 2;
+            return i;
+        }
+        else if (i < 0){
+            i = i - 2;
+            return i;
+        }
+        }
+
+
+    console.log(twoMoreAwayFromZero(2));
+    console.log(twoMoreAwayFromZero(0));
+    console.log(twoMoreAwayFromZero(0.5));
+    console.log(twoMoreAwayFromZero(-2));
+    console.log(twoMoreAwayFromZero(-3.5));
 </script>
 
 </body>
