@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS-Grid-Layout 3</title>
+</head>
+<style>
+    *{box-sizing: border-box}
+    body{
+        margin:0;
+    }
+    .wrapper {;
+        display:grid;
+        width:100vw;
+        height: 100vh;
+        margin: 0;
+        color: white;
+        font-size: 30px;
+        grid-template-columns: 25%;
+        grid-template-rows: 20% ;
+        grid-template-areas:
+                "one one one one"
+                "two three four four"
+                "two five five six"
+                "two seven eight nine"
+                "two ten ten ten"
+    ;
+
+
+    }
+
+    .yellow{
+        background-color: #FFD700;
+        border: 3px solid white;
+        padding: 10px;
+    }
+
+    section:nth-of-type(1){
+        grid-area: one;
+    }
+    section:nth-of-type(2){
+        grid-area: two;
+    }
+    section:nth-of-type(3){
+        grid-area: three;
+    }
+    section:nth-of-type(4){
+        grid-area: four;
+    } section:nth-of-type(5){
+          grid-area: five;
+      }
+    section:nth-of-type(6){
+        grid-area: six;
+
+    } section:nth-of-type(7){
+          grid-area: seven;
+      }
+    section:nth-of-type(8){
+        grid-area: eight;
+
+    } section:nth-of-type(9){
+          grid-area: nine;
+      }
+    section:nth-of-type(10){
+        grid-area: ten;
+
+
+</style>
+<body>
+<div class = "wrapper">
+    <section class="yellow">1</section>
+    <section class="yellow">2</section>
+    <section class="yellow">3</section>
+    <section class="yellow">4</section>
+    <section class="yellow">5</section>
+    <section class="yellow">6</section>
+    <section class="yellow">7</section>
+    <section class="yellow">8</section>
+    <section class="yellow">9</section>
+    <section class="yellow">10</section>
+</div>
+</body>
+</html>

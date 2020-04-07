@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS-Grid-Layout 2</title>
+</head>
+<style>
+    *{box-sizing: border-box}
+    body{
+        margin:0;
+    }
+    .wrapper {;
+        display:grid;
+        width:100vw;
+        height: 100vh;
+        margin: 0;
+        grid-template-columns: 20% 50% 15% ;
+        grid-template-rows: 15% 75% ;
+        grid-template-areas:
+                "header header header"
+                "nav article article "
+                "nav ads ads"
+
+                "footer footer footer ";
+
+
+    }
+
+    .green{
+        background-color: #9ACD32;
+        border: 3px solid white;
+        padding: 10px;
+    }
+    header {
+        grid-area: header;
+    }
+    nav {
+        grid-area: nav;
+    }
+    section:nth-of-type(1){
+        grid-area: article;
+    }
+    section:nth-of-type(2){
+        grid-area: ads;
+    }
+    footer{
+        grid-area: footer;
+    }
+</style>
+<body>
+<div class = "wrapper">
+    <header class="green">Header</header>
+    <nav class="green">Nav</nav>
+    <section class="green">Article</section>
+    <section class="green">Ads</section>
+    <footer class="green">Footer</footer>
+</div>
+</body>
+</html>
