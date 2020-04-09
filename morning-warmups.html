@@ -41,8 +41,8 @@
         return numo / numt
     }
 
-    console.log(quotientOfTwoNumbers(8,4))
-    console.log(quotientOfTwoNumbers(10,5))
+    console.log(quotientOfTwoNumbers(8,4));
+    console.log(quotientOfTwoNumbers(10,5));
 
     function numberSeven(){
         return 7;
@@ -60,10 +60,10 @@
         }
     }
 
-    console.log(isEvenNumber(8))
-    console.log(isEvenNumber(10009))
-    console.log(isEvenNumber(14))
-    console.log(isEvenNumber(234234))
+    console.log(isEvenNumber(8));
+    console.log(isEvenNumber(10009));
+    console.log(isEvenNumber(14));
+    console.log(isEvenNumber(234234));
 
 
     function returnEvenOddMessage(num){
@@ -74,10 +74,25 @@
             }
         }
 
-    console.log(isEvenNumber(8))
-    console.log(isEvenNumber(10009))
-    console.log(isEvenNumber(14))
-    console.log(isEvenNumber(234234))
+    // console.log(isEvenNumber(8))
+    // console.log(isEvenNumber(10009))
+    // console.log(isEvenNumber(14))
+    // console.log(isEvenNumber(234234))
+
+    // Write a javascript function that returns true or false as to whether or not a number passed into the function is not a whole number.
+
+    function isWholeNumber(num) {
+        if (num % 1 === 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    console.log(isWholeNumber(8));
+    console.log(isWholeNumber(10009));
+    console.log(isWholeNumber(14.444));
+    console.log(isWholeNumber(234234))
 
 
 
