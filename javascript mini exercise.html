@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+
+
+
+        function returnFive(){
+            return 5;
+        }
+
+        function isFive(num) {
+            if (num === 5) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+         function isShortWord(str){
+             if(str.length == 5){
+                 return true;
+             }else{
+                 return false;
+             }
+         }
+
+        console.log(isShortWord("fives"));
+
+        function isSameLength(str1,str2){
+            if(str1.length === str2.length){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        console.log(isSameLength("yup", "nope"));
+        console.log(isSameLength("yup", "sup"));
+
+        function getSmallerSegment(str,num){
+            let i = 0;
+            var werd = "";
+            while(i<num){
+                werd = werd + str.charAt(i);
+                i++
+            }
+            return werd;
+            }
+            console.log(getSmallerSegment("sanantonio",3));
+
+
+
+        console.log(getSmallerSegment("sanantonio",3));
+
+
+
+    </script>
+</body>
+</html>
+
+
+// ===== MINI PROBLEMS
+// Write a function, returnFive, that returns the number five. No inputs should be defined.
+// Write a function, isFive, that takes in an input and returns the boolean value true if the passed argument is the number 5 or the string "5". Return false otherwise.
+// Write a function, isShortWord, that takes in a string and returns the boolean value true if the passed argument is shorter than 5 characters. Return false otherwise.
+// Write a function, isSameLength, that takes in two string inputs and returns the boolean value true if the passed arguments are the same length. Return false otherwise.
+// Write a function, getSmallerSegment, that takes in a string and a number input. The function should return a substring of the first argument that is as many characters long as the second argument in lowercase.
+// example input: getSmallerSegment("Codeup", 3)
+// example output: "cod"
+
+
+
+
+

@@ -10,17 +10,22 @@ console.log("Great " + userFavColor + " is my favorite color too!");
 
 // Exercise 3
 // 1
-var mermaid = 3;
-var bear = 5;
-var hercules = 1;
+var mermaid = prompt('How many days did you rent Little Mermaids');
+var bear = prompt('How many days did you rent Little Mermaids');
+var hercules = prompt('How many days did you rent Little Mermaids');
+var rentalCost = prompt('How many days did you rent Little Mermaids')
 
-console.log((mermaid + bear + hercules) * 3);
+console.log((mermaid + bear + hercules) * rentalCost);
 // 2
-var google = 400;
-var amazon = 380;
-var facebook = 350;
+var google = prompt('What is googles pay rate?');
+var amazon = prompt('what is amazons pay rate?');
+var facebook = prompt('What is facebooks pay rate?');
+var googleHR =prompt('How many hours did you work for google?');
+var amazonHR =prompt('How many hours did you work for amazon?');
+var facebookHR =prompt('How many hours did you work for facebook?');
 
-console.log((6 * google) + (4 * amazon) + (10 * facebook));
+
+console.log((googleHR * google) + (amazonHR * amazon) + (facebookHR * facebook));
 // 3
 var numClass = prompt('How many people are in the class?');
 var schedule = confirm('Does your schedule meet the class schedule?');
@@ -38,7 +43,6 @@ enterClass(numClass, schedule);
 var numberOfItems = prompt('How many items in your bag?'); // number
 var offerIsValid = true; // boolean
 var isPremiumMember = false; // boolean
-var productDiscountApplied = offerIsValid && (isPremiumMember || numberOfItems > 2);
 
 function productDiscount(offerIsValid, isPremiumMember, numberOfItems){
     if(offerIsValid && (isPremiumMember || numberOfItems > 2)){
