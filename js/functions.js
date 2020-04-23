@@ -31,7 +31,7 @@ console.log(helloMessage);
  */
 var myName = "Larry";
 
-// console.log(sayHello(myName));
+console.log(sayHello(myName));
 // Don't modify the following line, it generates a random number between 1 and 3
 // and stores it in a variable named random
 var random = Math.floor((Math.random() * 3) + 1);
@@ -73,7 +73,7 @@ function isTwo(num){
  * > calculateTip(0.15, 33.42) // returns 5.013
  */
 function calculateTip(tippc, total){
-    return tippc * total;
+    return (tippc * total).toFixed(2);
 }
 // console.log(calculateTip(.20,20));
 // console.log(calculateTip(.25,25.50));
@@ -86,11 +86,11 @@ function calculateTip(tippc, total){
  * prompt the user for the bill total and a percentage they would like to tip,
  * then display the dollar amount they should tip
  */
-var zip = prompt("What is the tip percentage?");
-var zotal = prompt("What is the total?");
+var zip = Number(prompt("What is the tip percentage?(Enter as a decimal)"));
+var zotal = Number(prompt("What is the total?"));
 
 
-// console.log(calculateTip(zip,zotal));
+console.log(calculateTip(zip,zotal).toFixed(2));
 /**
  * TODO:
  * Create a function named `applyDiscount`. This function should accept a price
