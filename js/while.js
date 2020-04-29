@@ -17,15 +17,16 @@ function printStatus(num,allCones) {
     }
 }
 
+
 var allCones = Math.floor(Math.random() * 50) + 50;
 do {
     let conesBought = Math.floor(Math.random()* 5) + 1;
     printStatus(conesBought,allCones);
     if(allCones < conesBought && allCones > 0){
-        allCones=-allCones
+        allCones-=allCones
     }else if(allCones === 0){
-        allCones =- 1
+        allCones -= 1
     }else{
-    allCones = allCones - conesBought;
+    allCones -= conesBought;
     }
 } while (allCones > -1);

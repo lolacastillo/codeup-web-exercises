@@ -1,9 +1,12 @@
 "use strict";
 
 function showMultiplicationTable(num){
+    var output = "";
     for(var i = 1; i < 11; i++){
-        console.log(num * i);
+        output += num + "x" + i + "=" + num * i;
+        output += "\n";
     }
+    console.log(output)
 }
 
 
