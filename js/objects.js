@@ -75,6 +75,47 @@ var person = {
      * > console.log(books[0].author.firstName) // "Douglas"
      * > console.log(books[0].author.lastName) // "Adams"
      */
+    var books =[
+        {
+            title: "Das Kapital",
+            author:{
+                firstName: "Karl",
+                lastName: "Marx",
+            }
+        },
+        {
+            title: "Neuromancer",
+            author:{
+                firstName: "William",
+                lastName: "Gibson",
+            }
+        },
+        {
+            title:"Future Shock",
+            author:{
+                firstName: "Alvin",
+                lastName:"Toffler",
+            }
+        },
+        {
+            title:"The Stranger",
+            author:{
+                firstName:"Albert",
+                lastName:"Toffler",
+            }
+        },
+        {
+            title:"The Will to Power",
+            author:{
+                firstName:"Friedich",
+                lastName:"Nietzche",
+            },
+        },
+        ];
+
+    console.log(books[0].title) ;// "The Salmon of Doubt"
+     console.log(books[0].author.firstName) ;// "Douglas"
+     console.log(books[0].author.lastName); // "Adams"
 
     /**
      * TODO:
@@ -100,7 +141,11 @@ var person = {
      *      ---
      *      ...
      */
-
+     for (var i = 0; i < books.length; i++) {
+         console.log("Book # " + (i + 1));
+         console.log("Title: " + books[i].title);
+         console.log("Author: " + books[i].author.firstName + " " + books[i].author.lastName)
+     }
     /**
      * Bonus:
      * - Create a function named `createBook` that accepts a title and author
