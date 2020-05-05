@@ -132,6 +132,21 @@
             }
         }
     }
+
+    function numArray(input){
+        for (var i = 0; i < input.length; i++) {
+            var counter = 0;
+            if(typeof input[i] === "number"){
+                ++counter;
+            }
+        };
+        return counter > 0;
+    }
+
+    console.log(numArray([10,"string",678]));
+    console.log(numArray(["string"]));
+
+
 </script>
 
 </body>
