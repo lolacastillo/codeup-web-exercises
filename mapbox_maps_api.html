@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MapBox Maps Api</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="js/keys.js"></script>
+    <script src="js/geocode.js"></script>
+</head>
+<body>
+<div id='map' style='width: 400px; height: 300px;'></div>
+<script>
+    mapboxgl.accessToken = mapboxKey;
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        zoom: 10,
+        center: [-96.7970, 32.7767]
+    });
+    var arrRest = ["1234 S Lamar Blvd, Austin, TX 78704","601 Barton Springs Rd, Austin, TX 78704","Suite #118, 8557 Research Blvd Suite #118, Austin, TX 78757"];
+
+    arrRest.forEach(function(input){
+
+        geocode(input, mapboxKey).then(function (result) {
+            console.log(result);
+            map.setCenter(result);
+            map.setZoom(15);
+            var marker = new mapboxgl.Marker()
+                .setLngLat(result)
+                .addTo(map);
+            var ramenPopup = new mapboxgl.Popup()
+                .setHTML("<p>input</p>")
+                .addTo(map)
+
+            marker.setPopup(ramenPopup)
+        })
+        });
+
+
+
+
+</script>
+</body>
+</html>
