@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery Faq</title>
+
+    <style>
+        .invisible{
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+<h1 id="toggle">10 FAQs about National Parks:</h1>
+
+<dl>
+    <dt style="font-weight: bold">How did Yellowstone get its name?</dt>
+    <br>
+    <dd class="invisible">Yellowstone National Park is named after the Yellowstone River, the major river running through the park. According to French-Canadian trappers in the 1800s, they asked the name of the river from the Minnetaree tribe, who live in what is now eastern Montana. They responded “Mi tse a-da-zi,” which literally translates as “Rock Yellow River.” The trappers translated this into French as “Roche Jaune” or “Pierre Jaune.” In 1797, explorer-geographer David Thompson used the English translation—“Yellow Stone.” Lewis and Clark called the Yellowstone River by the French and English forms. Subsequent use formalized the name as “Yellowstone.</dd>
+    <br>
+    <dt style="font-weight: bold">Is Yellowstone the largest national park?</dt>
+    <br>
+    <dd class="invisible">No. More than half of Alaska’s national park units are larger, including Wrangell–St. Elias National Park and Preserve, which is the largest unit (13 million acres) in the National Park System. Until 1994, Yellowstone (at 2.2 million acres) was the largest national park in the contiguous United States. That year Death Valley National Monument was expanded and became a national park—it has more than 3 million acres.</dd>
+    <br>
+    <dt style="font-weight: bold">What's the difference between a national park and a national forest?</dt>
+    <br>
+    <dd class="invisible">National parks are administered by the Department of the Interior and national forests by the Department of Agriculture. The National Park Service is mandated to preserve resources unimpaired, while the Forest Service is mandated to wisely manage resources for many sustainable uses. Six national forests surround Yellowstone National Park.</dd>
+    <br>
+    <dt style="font-weight: bold">Is Yellowestone National Park the oldest US National Park?</dt>
+    <br>
+    <dd class="invisible">Yellowstone National Park (in Wyoming, Idaho, and Montana) is the oldest U.S. national park, founded in 1872.</dd>
+    <br>
+    <dt style="font-weight: bold">Are there waterfalls in some National Parks?</dt>
+    <br>
+    <dd class="invisible">Three of the 10 highest waterfalls in the world are located in Yosemite National Park in California.</dd>
+    <br>
+    <dt style="font-weight: bold">Does Yellowstone include a federally designated wilderness?</dt>
+    <br>
+    <dd class="invisible">No. Most of the park was recommended for this designation in 1972, but Congress has not acted on the recommendation.</dd>
+    <br>
+    <dt style="font-weight: bold">What is the smallest National Park?</dt>
+    <br>
+    <dd class="invisible">Hot Springs National Park, Arkansas</dd>
+    <br>
+    <dt style="font-weight: bold">How much land do national parks cover</dt>
+    <br>
+    <dd class="invisible">NPS manages the almost 400 sites in the National Park system covering 84. 6 million acres, or 3.4 percent of U.S. land. 79 million acres of this is NPS stewardship land, and the remaining lands are not federally owned, but managed by NPS.</dd>
+    <br>
+    <dt style="font-weight: bold">What is the worlds largest national park?</dt>
+    <br>
+    <dd class="invisible">Wrangell-St. Elias National Park, Alaska, is the largest national park, covering 13,000 square miles or 13.2 million acres.</dd>
+    <br>
+    <dt style="font-weight: bold">What state has the most national parks?</dt>
+    <br>
+    <dd class="invisible">California and Alaska each have eight national parks.</dd>
+    <br>
+<script src="js/jquery-2.2.4.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#toggle').click(function (event) {
+            event.preventDefault();
+            $('dd').toggleClass('invisible');
+        });
+    });
+</script>
+</dl>
+</body>
+</html>
