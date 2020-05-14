@@ -1,0 +1,43 @@
+body {
+    background-image: url("../img/contra.jpeg");
+    background-color: black;
+    background-repeat: no-repeat;
+    background-position: center top;
+
+}
+
+.aligncenter {
+    text-align: center;
+}
+
+h1{
+    color: white;
+    text-align: center;
+    font-size: small;
+    font-family: 'Metal Mania', cursive;
+}
+
+audio{
+    /*position: absolute;*/
+    /*padding-left: 70em ;*/
+    /*padding-top: 43em;*/
+}
+
+.rainbow_text_animated {
+    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 6s ease-in-out infinite;
+    background-size: 400% 100%;
+}
+
+@keyframes rainbow_animation {
+    0%,100% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 100% 0;
+    }
+}
