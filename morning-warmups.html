@@ -158,7 +158,29 @@
     console.log(powerFour("string"));
     console.log(powerFour(4));
 
+    // / Write a JavaScript function that takes in a string and returns the number of words in the string. If the function is ever passed an argument that is not a string, return the number 0.
 
+        function numWords(input){
+            var bucket = input.join(' ');
+            var counter = 0;
+            for(var i = 1; i < bucket.length; i ++){
+                if(typeof bucket[i] === "number"){
+                    return 0
+                }else{
+                    counter++;
+                }
+            }
+            return counter
+        }
+
+        // solution
+    function numOfWords(str){
+            if(typeof str === "string"){
+                return str.split("").length;
+            } else {
+                return 0
+            }
+    }
 </script>
 
 </body>
