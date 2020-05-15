@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Store</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body class="bg-success">
+
+<h1 class="text-center font-weight-bold"><u>My Tool Store</u></h1>
+<br style="line-height: 20px">
+<table id="products" class="table bg-light text-center w-75 m-auto table-bordered">
+    <thead class="table-dark">
+    <tr>
+        <th>Title</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Categories</th>
+    </tr>
+    </thead>
+    <tbody id="insertProducts" class=""></tbody>
+</table>
+<br>
+<div class="text-center">
+<button type="button" id="refreshButton" class="text-center p-2">Refresh Table Data</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<script>
+    (function () {
+        "use strict";
+        $(document).ready(function(){
+        // TODO: Create an AJAX GET request for the file under data/inventory.json
+        function tableDisplay() {
+            $.ajax('data/inventory.json').done(function (info) {
+                $('#insertProducts').append('<tr>');
+                $('#insertProducts').append('<th>' + info[0].title + '</th>');
+                $('#insertProducts').append('<th>' + info[0].quantity + '</th>');
+                $('#insertProducts').append('<th>' + info[0].price + '</th>');
+                $('#insertProducts').append('<th>' + info[0].categories.join(' ') + '</th>');
+                $('#insertProducts').append('</tr>');
+                $('#insertProducts').append('<tr>');
+                $('#insertProducts').append('<th>' + info[1].title + '</th>');
+                $('#insertProducts').append('<th>' + info[1].quantity + '</th>');
+                $('#insertProducts').append('<th>' + info[1].price + '</th>');
+                $('#insertProducts').append('<th>' + info[1].categories.join(' ') + '</th>');
+                $('#insertProducts').append('</tr>');
+                $('#insertProducts').append('<tr>');
+                $('#insertProducts').append('<th>' + info[2].title + '</th>');
+                $('#insertProducts').append('<th>' + info[2].quantity + '</th>');
+                $('#insertProducts').append('<th>' + info[2].price + '</th>');
+                $('#insertProducts').append('<th>' + info[2].categories.join(' ') + '</th>');
+                $('#insertProducts').append('</tr>');
+                $('#insertProducts').append('<tr>');
+                $('#insertProducts').append('<th>' + info[3].title + '</th>');
+                $('#insertProducts').append('<th>' + info[3].quantity + '</th>');
+                $('#insertProducts').append('<th>' + info[3].price + '</th>');
+                $('#insertProducts').append('<th>' + info[3].categories.join(' ') + '</th>');
+                $('#insertProducts').append('</tr>');
+
+
+            });
+        }
+        tableDisplay();
+        $('#refreshButton').click(function (info){
+            $('#insertProducts').html("");
+            tableDisplay();
+        })
+        // TODO: Take the data from inventory.json and append it to the products table
+        //       HINT: Your data should come back as a JSON object; use console.log() to inspect
+        //             its contents and fields
+        //       HINT: You will want to target #insertProducts for your new HTML elements
+        })
+    })();
+
+</script>
+
+</body>
+</html>
