@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Map</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+</head>
+<body>
+<h2 class="bg-info text-white">Weather App</h2>
+<div class="container">
+    <div id="post1"></div>
+    <div id="post2"></div>
+    <div id="post3"></div>
+    <div id="post4"></div>
+    <div id="post5"></div>
+</div>
+    <script src="js/jquery-2.2.4.js"></script>
+    <script src="js/keys.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+    <script>
+        "use strict";
+        var weatherUrl = 'https://api.openweathermap.org/data/2.5/onecall';
+        var weatherOptions = {
+            lat: 29.4241,
+            lon: -98.4936,
+            appid: OPEN_WEATHER_APPID,
+            // exclude:'minutely, current, hourly',
+            units: 'imperial'
+        };
+
+        function parseDate(timestamp) {
+            return new Date(timestamp * 1000).toLocaleDateString();
+        }
+
+        $.get(weatherUrl, weatherOptions).done(function (data) {
+            var todaysDate = new Date(data.current.dt * 1000);
+            $('#post1').append('<table class="table table-striped"><thead><th>San Antonio</th></thead><tbody><tr><th>Date: ' + todaysDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Current Weather: ' + data.current.temp + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.current.weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.current.humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.current.pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.current.wind_speed + '</th></tr>');
+
+
+            console.log(data.current.weather);
+
+
+        });
+    </script>
+</body>
+</html>

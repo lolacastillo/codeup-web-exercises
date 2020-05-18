@@ -12,16 +12,18 @@
 <h1 class="text-center mb-5"><u>Restaurant API</u></h1>
 
 <div class="w-75 m-auto">
-    <p>What day of the week is it?</p>
-    <form>
-        <input name="the_answer">
-        <input type="submit">
-    </form>
-    <br>
+
     <div id="container" class="jumbotron">
         <div class="m-auto" id="post">
         </div>
     </div>
+    <br>
+
+    <p>What day of the week is it?</p>
+    <form>
+        <input type="text" name="the">
+        <button type="submit">Submit</button>
+    </form>
 
 </div>
 
@@ -51,7 +53,8 @@
 
                 }
             }
-
+            console.log(document.getElementsByName('the').value);
+            // console.log(dayoweek);
         });
     });
 

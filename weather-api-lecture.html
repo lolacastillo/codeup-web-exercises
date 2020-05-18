@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather API lecture</title>
+</head>
+<body>
+<script src="js/jquery-2.2.4.js"></script>
+<script src="js/keys.js"></script>
+<script>
+    "use strict";
+    var weatherUrl = 'https://api.openweathermap.org/data/2.5/onecall';
+    var weatherOptions = {
+        lat: 29.4241,
+        lon: -98.4936,
+        appid: OPEN_WEATHER_APPID,
+        exclude:'minutely, current, hourly',
+        units: 'imperial'
+    };
+
+    $.get(weatherUrl, weatherOptions).done(function(data) {
+        console.log(data);
+    });
+</script>
+</body>
+</html>
