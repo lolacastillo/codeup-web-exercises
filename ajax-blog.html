@@ -22,7 +22,7 @@
             $.ajax('data/blog.json').done(function (info) {
                 console.log(info);
                 $('#post').append('<p>' + info[0].title + '</p>');
-                $('#post').append('<p class="bg-light">' + info[0].content + '</p>');
+                $('#post').append('<p class="bg-light w-75 m-auto">' + info[0].content + '</p>');
                 $('#post').append('<p>' + info[0].categories + '</p>');
                 $('#post').append('<p>' + info[0].date + '</p>');
 

@@ -18,13 +18,11 @@
         zoom: 10,
         center: [-96.7970, 32.7767]
     });
-    var map2 = setTimeout(function (){
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v9',
-            // zoom: 10,
-            // center: [-96.7970, 32.7767]
-    })
+
+    setTimeout(function(){
+        map.setZoom(3);
+        map.setCenter({lng: -98.4916, lat: 35.4252});
+        map.setStyle("mapbox://styles/mapbox/streets-v9");
     }, 5000);
 </script>
 
