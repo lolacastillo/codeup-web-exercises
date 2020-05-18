@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Restaurant API</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+</head>
+<body class="bg-warning">
+<h1 class="text-center mb-5"><u>Restaurant API</u></h1>
+
+<div class="w-75 m-auto">
+    <p>What day of the week is it?</p>
+    <form>
+        <input name="the_answer">
+        <input type="submit">
+    </form>
+    <br>
+    <div id="container" class="jumbotron">
+        <div class="m-auto" id="post">
+        </div>
+    </div>
+
+</div>
+
+
+<script src="js/jquery-2.2.4.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function() {
+        $.get("https://frest.glitch.me/restaurants", function (data) {
+            $('#post').append('<p class="text-center"><u>These restaurants are open on Monday at 11:30pm</u></p>');
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].operating_hours.Monday === "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm" || data[i].operating_hours.Monday === "11:30 am - 10:00 pm" || data[i].operating_hours.Monday === "11:00 am - 12:00 am" || data[i].operating_hours.Monday === "8:00 am - 10:30 pm" || data[i].operating_hours.Monday === "11:30 am - 2:00 am") {
+                    $('#post').append('<p class="text-center">' + data[i].name + '</p>');
+
+                }
+            }
+            $('#post').append('<p class="text-center"><u>These are pizza spots</u></p>');
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].cuisine_type === "Pizza") {
+                    $('#post').append('<p class="text-center">' + data[i].name + '</p>');
+
+                }
+            }
+
+        });
+    });
+
+        // $('#right').click(function () {
+        //     $.get("http://quotes.stormconsultancy.co.uk/random.json", function (data) {
+        //         $('#post').append('<p class="text-center">' + data.quote + '</p>');
+        //     });
+        // });
+        //
+        // $('#clearButton').click(function (info) {
+        //     $('#post').html("");
+        // });
+    // });
+</script>
+
+
+</body>
+</html>
