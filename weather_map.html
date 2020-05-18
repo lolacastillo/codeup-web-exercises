@@ -10,11 +10,13 @@
 <body>
 <h2 class="bg-info text-white">Weather App</h2>
 <div class="container">
-    <div id="post1"></div>
-    <div id="post2"></div>
-    <div id="post3"></div>
-    <div id="post4"></div>
-    <div id="post5"></div>
+    <div class="row">
+    <div id="post1" class="col"></div>
+    <div id="post2" class="col"></div>
+    <div id="post3" class="col"></div>
+    <div id="post4" class="col"></div>
+    <div id="post5" class="col"></div>
+    </div>
 </div>
     <script src="js/jquery-2.2.4.js"></script>
     <script src="js/keys.js"></script>
@@ -40,11 +42,22 @@
         }
 
         $.get(weatherUrl, weatherOptions).done(function (data) {
-            var todaysDate = new Date(data.current.dt * 1000);
-            $('#post1').append('<table class="table table-striped"><thead><th>San Antonio</th></thead><tbody><tr><th>Date: ' + todaysDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Current Weather: ' + data.current.temp + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.current.weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.current.humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.current.pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.current.wind_speed + '</th></tr>');
+            // var todaysDate = new Date(data.current.dt * 1000);
+            var firstDate = new Date(data.daily[0].dt * 1000);
+            var secondDate = new Date(data.daily[1].dt * 1000);
+            var thirdDate = new Date(data.daily[2].dt * 1000);
+            var fourthDate = new Date(data.daily[3].dt * 1000);
+            var fifthDate = new Date(data.daily[4].dt * 1000);
 
 
-            console.log(data.current.weather);
+            $('#post1').append('<table class="table table-striped"><thead><th>San Antonio</th></thead><tbody><tr><th>Date: ' + firstDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[0].temp.max + ' / ' + data.daily[0].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[0].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[0].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[0].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[0].wind_speed + '</th></tr>');
+            $('#post2').append('<table class="table table-striped"><thead><th>San Antonio</th></thead><tbody><tr><th>Date: ' + secondDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[1].temp.max + ' / ' + data.daily[1].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[1].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[1].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[1].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[1].wind_speed + '</th></tr>');
+            $('#post3').append('<table class="table table-striped"><thead><th>San Antonio</th></thead><tbody><tr><th>Date: ' + thirdDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[2].temp.max + ' / ' + data.daily[2].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[2].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[2].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[2].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[2].wind_speed + '</th></tr>');
+            $('#post4').append('<table class="table table-striped"><thead><th>San Antonio</th></thead><tbody><tr><th>Date: ' + fourthDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[3].temp.max + ' / ' + data.daily[3].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[3].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[3].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[3].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[3].wind_speed + '</th></tr>');
+            $('#post5').append('<table class="table table-striped"><thead><th>San Antonio</th></thead><tbody><tr><th>Date: ' + fifthDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[4].temp.max + ' / ' + data.daily[4].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[4].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[4].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[4].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[4].wind_speed + '</th></tr>');
+
+
+            console.log(firstDate);
 
 
         });
