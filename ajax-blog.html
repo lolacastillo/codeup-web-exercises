@@ -5,10 +5,12 @@
     <title>Ajax Blog</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
-<body class="bg-success">
-<h1 class="text-center">Larry's Blog</h1>
-<hr>
-<div id="post">
+<body class="bg-info">
+<div class="jumbotron">
+    <h1 class="display-4">Larry's Tech Tips</h1>
+    <p class="lead">The future is now.</p>
+</div>
+<div class="m-auto w-75" id="post">
 
 </div>
 <script src="js/jquery-2.2.4.js"></script>
@@ -21,17 +23,23 @@
         $(document).ready(function(){
             $.ajax('data/blog.json').done(function (info) {
                 console.log(info);
-                $('#post').append('<p>' + info[0].title + '</p>');
-                $('#post').append('<p class="bg-light w-75 m-auto">' + info[0].content + '</p>');
-                $('#post').append('<p>' + info[0].categories + '</p>');
-                $('#post').append('<p>' + info[0].date + '</p>');
+                $('#post').append('<p class="font-weight-bold font-italic">' + info[0].title + '</p>');
+                $('#post').append('<hr>');
+                $('#post').append('<p>' + info[0].content + '</p>');
+                $('#post').append('<p class="text-right">' + '<small>' + info[0].categories + '</small>' + '</p>');
+                $('#post').append('<p class="font-italic text-right">' + info[0].date + '</p>');
 
-                $('#post').append('<p>' + info[1].title + '</p>');
+                $('#post').append('<p class="font-weight-bold font-italic">' + info[1].title + '</p>')
+                $('#post').append('<hr>');
                 $('#post').append('<p>' + info[1].content + '</p>');
-                $('#post').append('<p>' + info[1].categories + '</p>');
-                $('#post').append('<p>' + info[1].date + '</p>');
+                $('#post').append('<p class="text-right">' + '<small>' + info[1].categories + '</small>' + '</p>');
+                $('#post').append('<p class="font-italic text-right">' + info[1].date + '</p>');
 
-
+                $('#post').append('<p class="font-weight-bold font-italic">' + info[2].title + '</p>')
+                $('#post').append('<hr>');
+                $('#post').append('<p>' + info[2].content + '</p>');
+                $('#post').append('<p class="text-right">' + '<small>' + info[2].categories + '</small>' + '</p>');
+                $('#post').append('<p class="font-italic text-right">' + info[2].date + '</p>');
 
 
 
