@@ -3,11 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather Map</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet'/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="js/keys.js"></script>
+
     <style>
         #image {
-            background-image: url("img/clouds.jpg") ;
+            background-image: url("img/clouds.jpg");
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        .coordinates {
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            position: absolute;
+            bottom: 40px;
+            left: 10px;
+            padding: 5px 10px;
+            margin: 0;
+            font-size: 11px;
+            line-height: 18px;
+            border-radius: 3px;
+            display: none;
         }
     </style>
 
@@ -18,39 +38,172 @@
 
 </div>
 <div class="container">
+    <div id="geocoder" class="geocoder mb-5 w-100"></div>
     <div class="row">
-    <div id="post1" class="col"></div>
-    <div id="post2" class="col"></div>
-    <div id="post3" class="col"></div>
-    <div id="post4" class="col"></div>
-    <div id="post5" class="col"></div>
+        <div id="post1" class="col"></div>
+        <div id="post2" class="col"></div>
+        <div id="post3" class="col"></div>
+        <div id="post4" class="col"></div>
+        <div id="post5" class="col"></div>
     </div>
 </div>
-    <script src="js/jquery-2.2.4.js"></script>
-    <script src="js/keys.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-            crossorigin="anonymous"></script>
-    <script>
-        "use strict";
-        var weatherUrl = 'https://api.openweathermap.org/data/2.5/onecall';
-        var weatherOptions = {
-            lat: 29.4241,
-            lon: -98.4936,
-            appid: OPEN_WEATHER_APPID,
-            // exclude:'minutely, current, hourly',
-            units: 'imperial'
-        };
+<div id='map' class="m-auto" style='width: 1200px; height: 600px;'></div>
+<pre id="coordinates" class="coordinates"></pre>
+<div class="mb-5"></div>
+<script src="js/jquery-2.2.4.js"></script>
+<script src="js/keys.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+<link
+        rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+        type="text/css"
+/>
+<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+<script>
+    "use strict";
+    // Weather app
+    var weatherUrl = 'https://api.openweathermap.org/data/2.5/onecall';
+    var weatherOptions = {
+        lat: 29.4241,
+        lon: -98.4936,
+        appid: OPEN_WEATHER_APPID,
+        // exclude:'minutely, current, hourly',
+        units: 'imperial'
+    };
+    // mapbox
+    mapboxgl.accessToken = mapboxKey;
+    // var coordinates = document.getElementById('coordinates');
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        zoom: 10,
+        center: [-96.7970, 32.7767]
+    });
+    // =======================search bar======================
 
-        function parseDate(timestamp) {
-            return new Date(timestamp * 1000).toLocaleDateString();
-        }
+    var geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl
+    });
+    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+    // ================draggable=============================
 
+    var canvas = map.getCanvasContainer();
+    var geojson = {
+        'type': 'FeatureCollection',
+        'features': [
+            {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-96.7970, 32.7767]
+                }
+            }
+        ]
+    };
+
+    function onMove(e) {
+        var coords = e.lngLat;
+
+// Set a UI indicator for dragging.
+        canvas.style.cursor = 'grabbing';
+
+// Update the Point feature in `geojson` coordinates
+// and call setData to the source layer `point` on it.
+        geojson.features[0].geometry.coordinates = [coords.lng, coords.lat];
+        weatherOptions.lon = coords.lng;
+        weatherOptions.lat = coords.lat;
+        map.getSource('point').setData(geojson);
+        appendWeather();
+    }
+
+    function onUp(e) {
+        var coords = e.lngLat;
+
+// Print the coordinates of where the point had
+// finished being dragged to on the map.
+        coordinates.style.display = 'block';
+        coordinates.innerHTML =
+            'Longitude: ' + coords.lng + '<br />Latitude: ' + coords.lat;
+        canvas.style.cursor = '';
+
+// Unbind mouse/touch events
+        map.off('mousemove', onMove);
+        map.off('touchmove', onMove);
+    }
+
+    map.on('load', function () {
+// Add a single point to the map
+        map.addSource('point', {
+            'type': 'geojson',
+            'data': geojson
+        });
+
+        map.addLayer({
+            'id': 'point',
+            'type': 'circle',
+            'source': 'point',
+            'paint': {
+                'circle-radius': 10,
+                'circle-color': '#3887be'
+            }
+        });
+
+// When the cursor enters a feature in the point layer, prepare for dragging.
+        map.on('mouseenter', 'point', function () {
+            map.setPaintProperty('point', 'circle-color', '#3bb2d0');
+            canvas.style.cursor = 'move';
+        });
+
+        map.on('mouseleave', 'point', function () {
+            map.setPaintProperty('point', 'circle-color', '#3887be');
+            canvas.style.cursor = '';
+        });
+
+        map.on('mousedown', 'point', function (e) {
+// Prevent the default map drag behavior.
+            e.preventDefault();
+
+            canvas.style.cursor = 'grab';
+
+            map.on('mousemove', onMove);
+            map.once('mouseup', onUp);
+        });
+
+        map.on('touchstart', 'point', function (e) {
+            if (e.points.length !== 1) return;
+
+// Prevent the default map drag behavior.
+            e.preventDefault();
+
+            map.on('touchmove', onMove);
+            map.once('touchend', onUp);
+        });
+    });
+
+
+    // function for converting the date to standard notation
+    function parseDate(timestamp) {
+        return new Date(timestamp * 1000).toLocaleDateString();
+    }
+
+    // appending new points to the div
+    function appendWeather() {
         $.get(weatherUrl, weatherOptions).done(function (data) {
             // var todaysDate = new Date(data.current.dt * 1000);
+            $('#post1').html("");
+            $('#post2').html("");
+            $('#post3').html("");
+            $('#post4').html("");
+            $('#post5').html("");
             var firstDate = new Date(data.daily[0].dt * 1000);
             var secondDate = new Date(data.daily[1].dt * 1000);
             var thirdDate = new Date(data.daily[2].dt * 1000);
@@ -58,17 +211,20 @@
             var fifthDate = new Date(data.daily[4].dt * 1000);
 
 
-            $('#post1').append('<table class="table table-striped table-bordered"><thead class="thead-dark"><th>San Antonio</th></thead><tbody><tr><th>Date: ' + firstDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[0].temp.max + ' / ' + data.daily[0].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[0].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[0].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[0].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[0].wind_speed + '</th></tr>');
-            $('#post2').append('<table class="table table-striped table-bordered"><thead class="thead-dark"><th>San Antonio</th></thead><tbody><tr><th>Date: ' + secondDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[1].temp.max + ' / ' + data.daily[1].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[1].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[1].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[1].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[1].wind_speed + '</th></tr>');
-            $('#post3').append('<table class="table table-striped table-bordered"><thead class="thead-dark"><th>San Antonio</th></thead><tbody><tr><th>Date: ' + thirdDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[2].temp.max + ' / ' + data.daily[2].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[2].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[2].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[2].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[2].wind_speed + '</th></tr>');
-            $('#post4').append('<table class="table table-striped table-bordered"><thead class="thead-dark"><th>San Antonio</th></thead><tbody><tr><th>Date: ' + fourthDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[3].temp.max + ' / ' + data.daily[3].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[3].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[3].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[3].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[3].wind_speed + '</th></tr>');
-            $('#post5').append('<table class="table table-striped table-bordered"><thead class="thead-dark"><th>San Antonio</th></thead><tbody><tr><th>Date: ' + fifthDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[4].temp.max + ' / ' + data.daily[4].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[4].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[4].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[4].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[4].wind_speed + '</th></tr>');
+            $('#post1').append('<table class="table table-striped table-bordered"><tbody><tr><th>Date: ' + firstDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[0].temp.max + ' / ' + data.daily[0].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[0].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[0].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[0].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[0].wind_speed + '</th></tr>');
+            $('#post2').append('<table class="table table-striped table-bordered"><tbody><tr><th>Date: ' + secondDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[1].temp.max + ' / ' + data.daily[1].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[1].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[1].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[1].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[1].wind_speed + '</th></tr>');
+            $('#post3').append('<table class="table table-striped table-bordered"><tbody><tr><th>Date: ' + thirdDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[2].temp.max + ' / ' + data.daily[2].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[2].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[2].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[2].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[2].wind_speed + '</th></tr>');
+            $('#post4').append('<table class="table table-striped table-bordered"><tbody><tr><th>Date: ' + fourthDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[3].temp.max + ' / ' + data.daily[3].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[3].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[3].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[3].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[3].wind_speed + '</th></tr>');
+            $('#post5').append('<table class="table table-striped table-bordered"><tbody><tr><th>Date: ' + fifthDate.toLocaleDateString() + '</th></tr>' + '<tr><th> Temp(max/min): ' + data.daily[4].temp.max + ' / ' + data.daily[4].temp.min + '</th></tr>' + '<tr><th scope="row"> Description: ' + data.daily[4].weather[0].description + '</th></tr>' + '<tr><th scope="row"> Humidity: ' + data.daily[4].humidity + '</th></tr>' + '<tr><th scope="row"> Pressure: ' + data.daily[4].pressure + '</th></tr>' + '<tr><th scope="row"> Wind: ' + data.daily[4].wind_speed + '</th></tr>');
 
 
             console.log(firstDate);
 
 
         });
-    </script>
+    }
+
+    appendWeather()
+</script>
 </body>
 </html>
