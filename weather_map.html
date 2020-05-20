@@ -347,15 +347,20 @@
 </div>
 <div id='map' class="m-auto" style='width: 1200px; height: 600px;'></div>
 <div class="container">
-    <form class="form-inline pt-2">
-        <div class="form-group mx-sm-3 mb-2 text-right">
+    <br>
+    <h5 class="text-left">To find the weather for another area search below!</h5>
+    <form >
+        <div class="form-group mx-sm-3 mb-2">
             <label for="locationInput"></label>
-            <input type="text" class="form-control mb-5" placeholder="Please enter a location" id="locationInput">
+            <input type="text" class="form-control" placeholder="Please enter a location" id="locationInput">
         </div>
-        <button type="submit" class="btn btn-success mb-5" id="findButton">Find</button>
+        <div class="text-right">
+        <button type="submit" class="btn btn-success mb-5 pl-5 pr-5 text-right" id="findButton">Find</button>
+        </div>
 
     </form>
-
+    <h2>Five Day Forecast</h2>
+    <hr>
     <div class="row">
         <div id="post1" class="col"></div>
         <div id="post2" class="col"></div>
