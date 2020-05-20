@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Review</title>
+</head>
+<body>
+<div class="container">
+    <div id="main">
+        <input type="text" id="input">
+        <button id="add-to-list">Add to List</button>
+
+        <h4>Favorite Food:</h4>
+        <ul id="favorite-food">
+            <li>Ramen</li>
+            <li>Sushi</li>
+            <li>Curry</li>
+        </ul>
+
+        <h4 id="change-me">Change Me</h4>
+
+        <h4>My Cohort: <span id="my-cohort"></span></h4>
+        <input type="text" id="cohort-name">
+        <button id="change-cohort">Update</button>
+
+        <br>
+        <button id="highlight">Highlight</button>
+    </div>
+</div>
+<!--===========Jquery CDN===============-->
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<script>
+    "use strict";
+    $(document).ready(function () {
+        // Problem #1
+        $('#add-to-list').click(function () {
+            var textInput = document.querySelector('#input');
+            $('ul').append('<li>' + textInput.value + '</li>');
+        });
+
+        // Problem #2
+        $('#change-me').dblclick(function(){
+            $(this).css('background-color', "purple");
+        });
+
+        // Problem #3
+        $('#change-cohort').click(function () {
+            var textInput = document.querySelector('#cohort-name');
+            $('#my-cohort').html('' + textInput.value);
+        });
+
+        // Problem #4
+        $('#highlight').click(function () {
+            $('#my-cohort').css('background-color', "yellow");
+        });
+
+        // Problem #5
+        var delay = 3000; // delay time in milliseconds
+        var timeoutId = setTimeout(function () {
+            $('.container').css('background-color','blue')
+        }, delay);
+    });
+</script>
+</body>
+</html>
