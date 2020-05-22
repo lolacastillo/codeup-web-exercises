@@ -45,11 +45,17 @@ var threeLanguages = users.filter(function(person){
     return person.languages.length >= 3;
 });
 
+let threeLangs = users.filter((user)=> user.languages.length > 2);
+
 // console.log(threeLanguages);
 
 // Problem 3
 var usersEmail = users.map(function(person){
     return person.email;
+});
+
+const filteredEmails = user.map(user=> {
+    return user.email;
 });
 // console.log(usersEmail);
 
@@ -57,6 +63,10 @@ var usersEmail = users.map(function(person){
 const totalExp = users.reduce((total,userYoe)=> {
     return total + userYoe.yearsOfExperience;
 },0);
+
+const averageExp = totalExp / users.length;
+
+
 // console.log(totalExp);
 // console.log(users[0].yearsOfExperience);
 
@@ -67,7 +77,7 @@ const longestEmail = users.reduce((email, usersEmail)=> (email.length > usersEma
 // Problem 6
 const nameString = users.reduce((nString, usersName)=> {
     return nString + (usersName.name + " ");
-}," ");
+},"Your instructors are: ");
 
 console.log(nameString);
 
