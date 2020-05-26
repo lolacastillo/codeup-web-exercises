@@ -16,7 +16,7 @@ function wait(num){
             resolve('resolved');
         },num);
     });
-    promise.then(resonpnse =>console.log(resonpnse));
+    promise.then(response =>console.log(response));
 }
 
 wait(1000);
